@@ -5,6 +5,7 @@ import numpy as np
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
+CITIES = ['chicago', 'new york city', 'washington']
 
 def get_filters():
     """
@@ -20,7 +21,7 @@ def get_filters():
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
         city = input('Which data would you like to analyze for Chicago, New York City, or Washington?').lower()
-        if city not in ['chicago', 'new york city', 'washington']:
+        if city not in CITIES:
             print("\n Sorry! Enter an appropriate city")
             continue
         else:
