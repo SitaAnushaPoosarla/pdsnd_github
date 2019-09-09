@@ -16,6 +16,7 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data! It\'s interesting!!')
+    print('\n Lets start')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
         city = input('Which data would you like to analyze for Chicago, New York City, or Washington?').lower()
@@ -59,17 +60,17 @@ def load_data(city, month, day):
         df - Pandas DataFrame containing city data filtered by month and day
     """
     df = pd.read_csv(CITY_DATA[city])
-    
+
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.weekday_name
-    
-    
+
+
     if month != 'all':
         months = ['january','february','march','april','may','june']
         month = months.index(month) + 1
         df = df[df['month'] == month]
-        
+
     if day != 'all':
         df = df[df['day_of_week'] == day.title()]
 
@@ -119,7 +120,7 @@ def station_stats(df):
     # TO DO: display most frequent combination of start station and end station trip
     Combination_startend_station = df.groupby(['Start Station', 'End Station']).count()
     print("\n The most frequent combination of start station and end station trip is : ", most_common_start_station, "and", most_common_end_station)
-          
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -151,10 +152,10 @@ def user_stats(df):
     start_time = time.time()
 
     # TO DO: Display counts of user types
-  
+
     user_types = df['User Type'].value_counts()
     print('\n The count of user types are: ', user_types)
-    
+
     # TO DO: Display counts of gender
     try:
         gender_count = df['Gender'].value_counts()
@@ -167,15 +168,15 @@ def user_stats(df):
     try:
         earliest_year_birth = np.min(df['Birth Year'])
         print('\n Earliest year of birth is : ', earliest_year_birth)
-   
+
         most_recent_birth = np.max(df['Birth Year'])
         print('\n Most recent year of birth is : ', most_recent_birth)
-   
+
         common_year_birth = df['Birth Year'].mode()
         print('\n Most common year of birth is : ', common_year_birth)
     except:
         print("\n Data not available for birth date in this city")
-        
+
     print("This took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
